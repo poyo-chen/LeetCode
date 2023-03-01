@@ -1,6 +1,8 @@
 package com.martinez.leetcode.editor.en;
 
 
+import java.util.List;
+
 /**
  * LeetCode 24. Medium Linked List
  */
@@ -39,8 +41,36 @@ public class SwapNodesInPairs {
   static class Solution2 {
 
     public ListNode swapPairs(ListNode head) {
-//TODO
-      return null;
+
+
+      // 1. 設定一個虛擬頭節點
+      ListNode listNode = new ListNode(-1);
+
+      // 2. 將頭節點串接在後面
+      listNode.next=head;
+
+      // 4. 設置一個指針節點，控制鏈表作業的節點
+      ListNode prevNode = listNode;
+
+      // 5. 迴圈依序整理head鏈表
+      while (head!=null&&head.next!=null){
+
+        // 6. 紀錄需反轉的兩個節點
+        ListNode firstNode=head;
+        ListNode secondNode=head.next;
+
+        // 7. 交換節點
+        prevNode.next=secondNode;
+        firstNode.next=secondNode.next;
+        secondNode.next=firstNode;
+
+        // 8. 切換指針節點
+        prevNode=firstNode;
+        head=firstNode.next;
+      }
+
+      // 3. 回傳虛擬頭節點後的鏈表
+      return listNode.next;
     }
   }
 
